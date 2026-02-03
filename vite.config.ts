@@ -10,7 +10,8 @@ export default defineConfig(({ mode }) => {
   const geminiKey = env.GEMINI_API_KEY ?? '';
 
   return {
-    base: mode === 'production' ? `/${repoName}/` : '/',
+    base: mode === 'production' ? '/prime-house-builders/' : '/',
+
     server: { port: 3000, host: '0.0.0.0' },
     plugins: [react()],
     define: {
