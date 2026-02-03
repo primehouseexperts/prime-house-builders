@@ -21,9 +21,8 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
         if (!response.ok) throw new Error('Markdown file not found');
         const text = await response.text();
         
-        // Safety check for marked library
         // @ts-ignore
-        if (window.marked && typeof window.marked.parse === 'function') {
+        if (window.marked) {
           // @ts-ignore
           setDescriptionHtml(window.marked.parse(text));
         } else {

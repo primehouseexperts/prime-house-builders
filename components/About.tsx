@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
@@ -13,13 +12,12 @@ const About: React.FC = () => {
         if (!res.ok) throw new Error('About file not found');
         const text = await res.text();
         
-        // Safety check for marked library
+        // Use the global marked library provided via CDN in index.html
         // @ts-ignore
-        if (window.marked && typeof window.marked.parse === 'function') {
+        if (window.marked) {
           // @ts-ignore
           setContent(window.marked.parse(text));
         } else {
-          // Fallback if marked is still loading or failed
           setContent(text.replace(/\n/g, '<br/>'));
         }
       } catch (err) {
