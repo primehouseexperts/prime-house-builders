@@ -1,4 +1,3 @@
-# Build Vite (React) and deploy /dist to GitHub Pages
 name: Deploy static content to Pages
 
 on:
