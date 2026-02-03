@@ -1,6 +1,5 @@
-
 import React from 'react';
-import { NavItem, ProjectConfig } from './types';
+import { NavItem, ProjectConfig } from './types.ts';
 import { Home, Info, Briefcase, Mail } from 'lucide-react';
 
 export const NAV_ITEMS: NavItem[] = [
