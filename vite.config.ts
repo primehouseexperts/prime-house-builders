@@ -7,13 +7,10 @@ export default defineConfig(({ mode }) => {
   const geminiKey = env.GEMINI_API_KEY ?? '';
 
   return {
-    // Custom domain: deploy at root
+    // Custom domain (root): build assets from /
     base: '/',
 
-    server: {
-      port: 3000,
-      host: '0.0.0.0',
-    },
+    server: { port: 3000, host: '0.0.0.0' },
 
     plugins: [react()],
 
@@ -23,9 +20,7 @@ export default defineConfig(({ mode }) => {
     },
 
     resolve: {
-      alias: {
-        '@': path.resolve(__dirname, '.'),
-      },
+      alias: { '@': path.resolve(__dirname, '.') },
     },
   };
 });
