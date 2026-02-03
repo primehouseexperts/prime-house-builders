@@ -28,8 +28,8 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v6
         with:
-          node-version: "lts/*"
-          # IMPORTANT: removed "cache: npm" because no lock file exists
+          node-version: "20"
+          # IMPORTANT: do NOT set cache: "npm" unless you have package-lock.json
 
       - name: Install dependencies
         run: npm install
