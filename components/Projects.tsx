@@ -1,7 +1,6 @@
-
 import React from 'react';
-import { ProjectConfig } from '../types';
-import { PROJECT_REGISTRY } from '../constants';
+import { ProjectConfig } from '../types.ts';
+import { PROJECT_REGISTRY } from '../constants.tsx';
 import { motion } from 'framer-motion';
 import { ExternalLink } from 'lucide-react';
 

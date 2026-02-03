@@ -1,6 +1,5 @@
-
 import React, { useEffect, useState } from 'react';
-import { ProjectConfig } from '../types';
+import { ProjectConfig } from '../types.ts';
 import { motion } from 'framer-motion';
 import { X, ChevronLeft, Loader2 } from 'lucide-react';
 
@@ -88,7 +87,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
             </div>
           ) : (
             <div 
-              className="markdown-content text-neutral-400 font-light text-lg space-y-6"
+              className="markdown-content text-neutral-400 font-light text-lg space-y-6 prose prose-invert max-w-none"
               dangerouslySetInnerHTML={{ __html: descriptionHtml }}
             />
           )}
@@ -122,7 +121,6 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
                 className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000"
                 onError={(e) => {
                   const target = e.target as HTMLImageElement;
-                  // If it's the first image and it fails, show a placeholder
                   if (idx === 0) {
                     target.src = `https://images.unsplash.com/photo-1503387762-592dea58ef23?auto=format&fit=crop&q=80&w=1200`;
                   } else {

@@ -1,6 +1,5 @@
-
 import React, { useState } from 'react';
-import { NAV_ITEMS } from '../constants';
+import { NAV_ITEMS } from '../constants.tsx';
 import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
