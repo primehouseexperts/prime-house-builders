@@ -14,13 +14,15 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
 
   useEffect(() => {
     document.body.style.overflow = 'hidden';
-    
+
     const fetchContent = async () => {
       try {
-        const response = await fetch(`./projects/${project.folder}/markdown.md`);
+        const base = import.meta.env.BASE_URL; // ✅ works with /repo/ base
+        const response = await fetch(`${base}projects/${project.folder}/markdown.md`);
         if (!response.ok) throw new Error('Markdown file not found');
+
         const text = await response.text();
-        
+
         // @ts-ignore
         if (window.marked) {
           // @ts-ignore
@@ -33,7 +35,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
         setDescriptionHtml(`
           <h2>${project.displayName}</h2>
           <p>This project archive is currently being updated.</p>
-          <p>Please ensure <code>projects/${project.folder}/markdown.md</code> exists in your repository.</p>
+          <p>Please ensure <code>public/projects/${project.folder}/markdown.md</code> exists.</p>
         `);
       } finally {
         setLoading(false);
@@ -41,18 +43,21 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
     };
 
     fetchContent();
-    return () => { document.body.style.overflow = 'unset'; };
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
   }, [project]);
 
+  const base = import.meta.env.BASE_URL;
   const galleryImages = [
-    `./projects/${project.folder}/images/${project.thumbnail}`,
-    `./projects/${project.folder}/images/2.jpg`,
-    `./projects/${project.folder}/images/3.jpg`,
-    `./projects/${project.folder}/images/4.jpg`
+    `${base}projects/${project.folder}/images/${project.thumbnail}`,
+    `${base}projects/${project.folder}/images/2.jpg`,
+    `${base}projects/${project.folder}/images/3.jpg`,
+    `${base}projects/${project.folder}/images/4.jpg`,
   ];
 
   return (
-    <motion.div 
+    <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -60,13 +65,13 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
     >
       <div className="absolute inset-0 bg-black/98" onClick={onClose}></div>
 
-      <motion.div 
+      <motion.div
         initial={{ y: 100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         exit={{ y: 100, opacity: 0 }}
         className="relative w-full max-w-[1600px] h-full md:h-[90vh] bg-neutral-900 overflow-hidden shadow-2xl flex flex-col lg:flex-row"
       >
-        <button 
+        <button
           onClick={onClose}
           className="absolute top-6 right-6 z-[120] w-12 h-12 bg-white text-black flex items-center justify-center rounded-full hover:bg-amber-500 transition-colors"
         >
@@ -74,7 +79,9 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
         </button>
 
         <div className="lg:w-2/5 p-8 md:p-16 lg:p-24 overflow-y-auto bg-neutral-900 border-r border-white/5 scrollbar-hide">
-          <span className="text-amber-500 font-bold uppercase tracking-[0.4em] text-xs mb-6 block">Project Specification</span>
+          <span className="text-amber-500 font-bold uppercase tracking-[0.4em] text-xs mb-6 block">
+            Project Specification
+          </span>
           <h2 className="font-serif text-5xl md:text-7xl text-white mb-10 leading-tight">
             {project.displayName}
           </h2>
@@ -85,7 +92,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
               <span>Fetching archive data...</span>
             </div>
           ) : (
-            <div 
+            <div
               className="markdown-content text-neutral-400 font-light text-lg space-y-6 prose prose-invert max-w-none"
               dangerouslySetInnerHTML={{ __html: descriptionHtml }}
             />
@@ -102,7 +109,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
             </div>
           </div>
 
-          <button 
+          <button
             onClick={onClose}
             className="mt-12 flex items-center text-amber-500 text-xs font-bold uppercase tracking-widest group"
           >
@@ -114,14 +121,15 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
         <div className="lg:w-3/5 bg-black overflow-y-auto scroll-smooth">
           {galleryImages.map((img, idx) => (
             <div key={idx} className="relative aspect-[16/10] overflow-hidden border-b border-white/5">
-              <img 
-                src={img} 
-                alt={`${project.displayName} view ${idx + 1}`} 
+              <img
+                src={img}
+                alt={`${project.displayName} view ${idx + 1}`}
                 className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000"
                 onError={(e) => {
                   const target = e.target as HTMLImageElement;
                   if (idx === 0) {
-                    target.src = `https://images.unsplash.com/photo-1503387762-592dea58ef23?auto=format&fit=crop&q=80&w=1200`;
+                    target.src =
+                      'https://images.unsplash.com/photo-1503387762-592dea58ef23?auto=format&fit=crop&q=80&w=1200';
                   } else {
                     target.style.display = 'none';
                   }
@@ -132,11 +140,11 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
               </div>
             </div>
           ))}
-          
+
           <div className="p-20 text-center bg-black border-t border-white/5">
             <h3 className="font-serif text-3xl text-white mb-6 italic">Want to discuss a similar project?</h3>
-            <a 
-              href="#contact" 
+            <a
+              href="#contact"
               onClick={onClose}
               className="inline-block px-12 py-5 bg-amber-500 text-black font-bold uppercase tracking-widest hover:bg-white transition-all transform hover:-translate-y-1"
             >
