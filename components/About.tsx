@@ -8,22 +8,39 @@ const About: React.FC = () => {
   useEffect(() => {
     const loadContent = async () => {
       try {
-        const base = import.meta.env.BASE_URL; // ✅ works with /repo/ base
-        const res = await fetch(`${base}about/about.md`);
-        if (!res.ok) throw new Error('About file not found');
+        const base = import.meta.env.BASE_URL || '/';
 
-        const text = await res.text();
+        // Try both:
+        // 1) public/about/about.md  -> served as /about/about.md
+        // 2) public/about.md        -> served as /about.md
+        const candidates = [
+          `${base}about/about.md`,
+          `${base}about.md`,
+        ];
+
+        let text: string | null = null;
+
+        for (const url of candidates) {
+          const res = await fetch(url, { cache: 'no-cache' });
+          if (res.ok) {
+            text = await res.text();
+            break;
+          }
+        }
+
+        if (!text) throw new Error('About markdown not found in public/');
 
         // Use the global marked library provided via CDN in index.html
         // @ts-ignore
-        if (window.marked) {
+        if (window.marked?.parse) {
           // @ts-ignore
           setContent(window.marked.parse(text));
         } else {
+          // Fallback if marked isn't available
           setContent(text.replace(/\n/g, '<br/>'));
         }
       } catch (err) {
-        console.warn('Could not load about/about.md, using fallback content.');
+        console.warn('Could not load About markdown, using fallback content.', err);
         setError(true);
       }
     };
@@ -34,7 +51,7 @@ const About: React.FC = () => {
   const fallbackContent = `
     <h2>Our Story</h2>
     <p>Prime House Builders has established itself as a premier construction partner for discerning clients. We manage every phase of the project, ensuring that the transition from architectural concept to physical reality is seamless, transparent, and superior in quality.</p>
-    <p>Please create <strong>public/about/about.md</strong> to customize this text.</p>
+    <p>To customize this text, create <strong>public/about/about.md</strong> (recommended) or <strong>public/about.md</strong>.</p>
   `;
 
   return (
