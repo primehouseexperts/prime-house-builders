@@ -95,11 +95,11 @@ const About: React.FC = () => {
 
           <div className="mt-12 grid grid-cols-2 gap-8 border-t border-white/10 pt-10">
             <div>
-              <div className="text-4xl font-serif text-amber-500 mb-1">15+</div>
+              <div className="text-4xl font-serif text-amber-500 mb-1">2+</div>
               <div className="text-xs uppercase tracking-widest text-neutral-500">Years Experience</div>
             </div>
             <div>
-              <div className="text-4xl font-serif text-amber-500 mb-1">200+</div>
+              <div className="text-4xl font-serif text-amber-500 mb-1">10+</div>
               <div className="text-xs uppercase tracking-widest text-neutral-500">Projects Completed</div>
             </div>
           </div>
