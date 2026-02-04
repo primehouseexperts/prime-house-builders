@@ -1,14 +1,17 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 
 const Hero: React.FC = () => {
+  // background.jpg should be served from the site root.
+  // Put the file here: prime-house-builders/public/background.jpg
+  const bgUrl = `${import.meta.env.BASE_URL}background.jpg`;
+
   return (
     <div className="relative h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image */}
-      <div 
+      <div
         className="absolute inset-0 bg-cover bg-center z-0 transition-transform duration-1000"
-        style={{ backgroundImage: `url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=2048')` }}
+        style={{ backgroundImage: `url('${bgUrl}')` }}
       >
         <div className="absolute inset-0 bg-black/60"></div>
       </div>
@@ -23,18 +26,20 @@ const Hero: React.FC = () => {
             Building The <br />
             <span className="italic text-amber-500">Future</span> Today
           </h1>
+
           <p className="max-w-2xl mx-auto text-lg md:text-xl text-neutral-300 mb-10 font-light tracking-wide">
             Prime House Builders specializes in high-end construction contracts, bringing architectural visions to life with unparalleled craftsmanship.
           </p>
+
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a 
-              href="#projects" 
+            <a
+              href="#projects"
               className="px-10 py-4 bg-white text-black font-bold uppercase tracking-widest hover:bg-amber-500 transition-all transform hover:scale-105 w-full sm:w-auto text-center"
             >
               View Our Work
             </a>
-            <a 
-              href="#contact" 
+            <a
+              href="#contact"
               className="px-10 py-4 border border-white/30 text-white font-bold uppercase tracking-widest hover:bg-white/10 transition-all w-full sm:w-auto text-center"
             >
               Start Your Project
@@ -44,7 +49,7 @@ const Hero: React.FC = () => {
       </div>
 
       {/* Scroll indicator */}
-      <motion.div 
+      <motion.div
         animate={{ y: [0, 10, 0] }}
         transition={{ repeat: Infinity, duration: 1.5 }}
         className="absolute bottom-10 left-1/2 -translate-x-1/2 text-white/40 flex flex-col items-center"
