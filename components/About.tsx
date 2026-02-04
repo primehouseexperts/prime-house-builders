@@ -66,7 +66,8 @@ const About: React.FC = () => {
         >
           <div className="relative z-10 border-[12px] border-amber-500/20 translate-x-4 translate-y-4 overflow-hidden">
             <img
-              src="https://images.unsplash.com/photo-1541913057815-998214f4a363?auto=format&fit=crop&q=80&w=1024"
+              //About us Image
+              src={`${import.meta.env.BASE_URL}about/about-hero.jpg`}
               alt="Architectural Planning"
               className="shadow-2xl grayscale hover:grayscale-0 transition-all duration-700 w-full"
             />
