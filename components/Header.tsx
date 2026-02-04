@@ -19,10 +19,10 @@ const Header: React.FC<HeaderProps> = ({ scrolled }) => {
       <div className="container mx-auto px-6 flex justify-between items-center">
         <a href="#home" className="flex flex-col">
           <span className="font-serif text-2xl lg:text-3xl font-bold tracking-tighter text-white">
-            PRIME<span className="text-amber-500">HOUSE</span>
+            PRIME HOUSE <span className="text-amber-500">BUILDERS</span>
           </span>
           <span className="text-[10px] uppercase tracking-[0.3em] text-neutral-400 -mt-1">
-            Builders & Experts
+            Civil Engineering Design, Constructions & Consultations
           </span>
         </a>
 
