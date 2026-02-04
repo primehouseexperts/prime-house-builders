@@ -12,15 +12,15 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
   const [descriptionHtml, setDescriptionHtml] = useState<string>('');
   const [loading, setLoading] = useState(true);
 
+  const base = (import.meta as any).env?.BASE_URL || '/';
+
   useEffect(() => {
     document.body.style.overflow = 'hidden';
 
     const fetchContent = async () => {
       try {
-        const base = import.meta.env.BASE_URL; // ✅ works with /repo/ base
-        const response = await fetch(`${base}projects/${project.folder}/markdown.md`);
+        const response = await fetch(`${base}projects/${project.folder}/markdown.md`, { cache: 'no-cache' });
         if (!response.ok) throw new Error('Markdown file not found');
-
         const text = await response.text();
 
         // @ts-ignore
@@ -46,9 +46,8 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
     return () => {
       document.body.style.overflow = 'unset';
     };
-  }, [project]);
+  }, [project, base]);
 
-  const base = import.meta.env.BASE_URL;
   const galleryImages = [
     `${base}projects/${project.folder}/images/${project.thumbnail}`,
     `${base}projects/${project.folder}/images/2.jpg`,
@@ -82,9 +81,8 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
           <span className="text-amber-500 font-bold uppercase tracking-[0.4em] text-xs mb-6 block">
             Project Specification
           </span>
-          <h2 className="font-serif text-5xl md:text-7xl text-white mb-10 leading-tight">
-            {project.displayName}
-          </h2>
+
+          <h2 className="font-serif text-5xl md:text-7xl text-white mb-10 leading-tight">{project.displayName}</h2>
 
           {loading ? (
             <div className="flex items-center text-neutral-500">
@@ -98,21 +96,13 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
             />
           )}
 
-          <div className="mt-16 pt-10 border-t border-white/10 grid grid-cols-2 gap-8">
-            <div>
-              <span className="text-[10px] uppercase tracking-widest text-neutral-500 block mb-1">Path</span>
-              <span className="text-white text-[10px] font-mono">/projects/{project.folder}/</span>
-            </div>
-            <div>
-              <span className="text-[10px] uppercase tracking-widest text-neutral-500 block mb-1">Status</span>
-              <span className="text-white text-sm uppercase">Delivered</span>
-            </div>
+          {/* ✅ Removed the "Path /projects/..." debug text. Keep only Status (optional) */}
+          <div className="mt-16 pt-10 border-t border-white/10">
+            <span className="text-[10px] uppercase tracking-widest text-neutral-500 block mb-1">Status</span>
+            <span className="text-white text-sm uppercase">Delivered</span>
           </div>
 
-          <button
-            onClick={onClose}
-            className="mt-12 flex items-center text-amber-500 text-xs font-bold uppercase tracking-widest group"
-          >
+          <button onClick={onClose} className="mt-12 flex items-center text-amber-500 text-xs font-bold uppercase tracking-widest group">
             <ChevronLeft size={16} className="mr-2 group-hover:-translate-x-2 transition-transform" />
             Back to Catalog
           </button>
@@ -128,8 +118,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
                 onError={(e) => {
                   const target = e.target as HTMLImageElement;
                   if (idx === 0) {
-                    target.src =
-                      'https://images.unsplash.com/photo-1503387762-592dea58ef23?auto=format&fit=crop&q=80&w=1200';
+                    target.src = `https://images.unsplash.com/photo-1503387762-592dea58ef23?auto=format&fit=crop&q=80&w=1200`;
                   } else {
                     target.style.display = 'none';
                   }
