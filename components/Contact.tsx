@@ -41,7 +41,7 @@ const Contact: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Spam bots fill hidden fields; silently succeed to avoid giving signals.
+    // Honeypot: bots fill hidden field; silently succeed.
     if (form.gotcha.trim().length > 0) {
       setStatus('success');
       return;
