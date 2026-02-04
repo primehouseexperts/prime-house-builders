@@ -49,7 +49,7 @@ const App: React.FC = () => {
 
       <footer className="py-12 border-t border-white/10 text-center text-neutral-500 bg-black relative z-10">
         <div className="container mx-auto px-4">
-          <h2 className="font-serif text-2xl text-white mb-4">Prime House Builders</h2>
+          <h2 className="font-serif text-2xl text-white mb-4">Prime House Builders & Experts </h2>
           <p className="max-w-md mx-auto mb-8 text-sm">
             Crafting exceptional structures with precision and passion since 2005. 
             We take building contracts and deliver dreams.
