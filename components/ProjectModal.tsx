@@ -55,6 +55,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
     `${base}projects/${project.folder}/images/2.jpg`,
     `${base}projects/${project.folder}/images/3.jpg`,
     `${base}projects/${project.folder}/images/4.jpg`,
+    `${base}projects/${project.folder}/images/5.jpg`,
   ];
 
   return (
