@@ -230,10 +230,6 @@ const Contact: React.FC = () => {
               </SocialIconButton>
             </div>
 
-            <div className="mt-3 text-[11px] text-neutral-500">
-              Update links in <span className="text-neutral-300">components/Contact.tsx</span> →{' '}
-              <span className="text-neutral-300">CONTACT_LINKS</span>.
-            </div>
           </div>
         </div>
 
