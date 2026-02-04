@@ -22,7 +22,7 @@ const Header: React.FC<HeaderProps> = ({ scrolled }) => {
             PRIME<span className="text-amber-500">HOUSE</span>
           </span>
           <span className="text-[10px] uppercase tracking-[0.3em] text-neutral-400 -mt-1">
-            Builders & Contractors
+            Builders & Experts
           </span>
         </a>
 
