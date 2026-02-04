@@ -23,7 +23,7 @@ export const PROJECT_REGISTRY: ProjectConfig[] = [
     id: 'lakeside',
     folder: 'lakeside-villa', 
     displayName: 'Modern Lakeside Villa',
-    thumbnail: '1.jpg' // looks for /projects/lakeside-villa/images/1.jpg
+    thumbnail: 'main.jpg' // looks for /projects/lakeside-villa/images/1.jpg
   },
   { 
     id: 'urban',
@@ -35,7 +35,7 @@ export const PROJECT_REGISTRY: ProjectConfig[] = [
     id: 'coastal',
     folder: 'coastal-retreat', 
     displayName: 'Coastal Retreat',
-    thumbnail: 'hero.jpg'
+    thumbnail: 'main.jpg'
   }
 ];
 
